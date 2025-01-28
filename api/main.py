@@ -23,6 +23,18 @@ async def health_check():
 
 @app.get("/weather")
 async def get_weather(city: str, api_key: str = Depends(get_api_key)):
+
+    # If no city is provided, return helpful information
+    if not city:
+        return {
+            "error": "Missing required query parameter: 'city'.",
+            "usage": "Please provide the 'city' parameter to fetch weather information.",
+            "example": "/weather?city=New York",
+            "parameters": {
+                "city": "The name of the city (e.g., 'New York')."
+            }
+        }
+
     try:
         # Step 1: Get latitude and longitude for the city
         geo_url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&limit=1&appid={api_key}"
