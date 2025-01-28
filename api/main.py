@@ -19,7 +19,7 @@ def get_api_key():
 
 @app.get("/")
 async def health_check():
-    return {"message": "The health check - we are up and running..."}
+    return {"message": "Welcome to the Weather API demo for TRACR - we are up and running..."}
 
 @app.get("/weather")
 async def get_weather(city: str, api_key: str = Depends(get_api_key)):
