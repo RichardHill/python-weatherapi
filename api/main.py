@@ -46,7 +46,7 @@ async def get_weather(city: str, api_key: str = Depends(get_api_key)):
 
         if weather_response.status_code != 200:
             weather_response.reason
-            raise HTTPException(status_code=weather_response.status_code, detail=weather_response.reason + " " + api_key + " " + "Lat= " + str(lat) + " " + "Lon= " + str(lon))
+            raise HTTPException(status_code=weather_response.status_code, detail=weather_response.reason + " " + "Lat= " + str(lat) + " " + "Lon= " + str(lon))
 
         weather_data = weather_response.json()
 
