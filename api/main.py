@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends,HTTPException
+from fastapi import FastAPI, Depends,HTTPException, Query
 import requests
 import os
 import logging
@@ -22,8 +22,13 @@ async def health_check():
     return {"message": "Welcome to the Weather API demo for TRACR - we are up and running..."}
 
 @app.get("/weather")
-async def get_weather(city: str, api_key: str = Depends(get_api_key)):
-
+async def get_weather(
+    city: str = Query(
+        default=None,
+        description="Name of the city for which you want the weather information."
+    ), 
+    api_key: str = Depends(get_api_key)
+):
     # If no city is provided, return helpful information
     if not city:
         return {
